@@ -14,8 +14,7 @@ if (data.toString().trim() === 'exit') process.exit();
     writebleStream.write(data);  
 });
 
-process.on('exit', () => stdout.write('\nHave a nice day!\n(exit)\n'));
+process.on('exit', () => stdout.write('\nHave a nice day!\n'));
 process.on('SIGINT', () => {
-    stdout.write('\nHave a nice day!\n(Ctrl+C)\n'); 
     process.exit()
 });
