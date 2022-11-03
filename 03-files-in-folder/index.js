@@ -20,7 +20,7 @@ fs.readdir(dirPath,
                 if (err) {
                   console.log(err);
                 } else {
-                console.log(`${fileName} - ${fileExt} -  ${(fileStats.size)/1000}kb`);
+                console.log(`${fileName} - ${fileExt} -  ${(fileStats.size)/1024}kb`);
                 }
             });
         }  

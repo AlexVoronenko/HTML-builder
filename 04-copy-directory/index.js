@@ -7,7 +7,8 @@ const dirDst = path.join(__dirname,"files-copy");
 copyDir(dirSrc,dirDst);
 
 function copyDir(src,dst) {
-
+    fs.rm(dst, { recursive: true }, error => {
+        if (error) throw error;
     fs.mkdir(dst, { recursive: true }, error => {
         if (error) throw error;
 
@@ -20,12 +21,17 @@ function copyDir(src,dst) {
                 if (file.isFile()){
                     fs.copyFile(path.join(src,file.name), path.join(dst,file.name), (error) => {
                         if (error) throw error;
-                    //   console.log(`File: ${file.name} successfully copied`);
+                        console.log(`File: ${file.name} successfully copied`);
                      });
                 }
                  });
 
           }
     });
-    });   
+    });      
+    
+    
+    });
+
+ 
 }
