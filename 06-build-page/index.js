@@ -1,11 +1,12 @@
 const fs = require('fs/promises');
+const { resolve } = require('path');
 const path = require('path');
 
 const dirDst = path.join(__dirname, "project-dist");
 
 (async () => {
   try {
-    await fs.rm(path.join(__dirname, "project-dist"), { recursive: true, maxRetries: 2, retryDelay: 100 });
+    await fs.rm(path.join(__dirname, "project-dist"), { recursive: true, maxRetries: 2, retryDelay: 100, force: true });
     await fs.mkdir(path.join(__dirname, "project-dist"),);
 
     let template = await fs.readFile(path.join(__dirname, "template.html"), "utf-8");
@@ -32,9 +33,7 @@ const dirDst = path.join(__dirname, "project-dist");
   } catch (error) {
     console.log(`Error: ${error}`);
   }
-  console.log(`All done!`);
-}
-)();
+})();
 
 async function mergeCss(src, dst) {
   try {
@@ -66,5 +65,5 @@ async function copyAssets(src, dst) {
   } catch {
     console.log(`Error: ${error}. Can not sync directory.`);
   }
-  // console.log(`Copy folder completed successfully ${dst}`)
+  console.log(`Copy files completed successfully (folder:${dst})`)
 };
