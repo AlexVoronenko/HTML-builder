@@ -7,8 +7,7 @@ const dirDst = path.join(__dirname, "files-copy");
 copyDir(dirSrc, dirDst);
 
 function copyDir(src, dst) {
-  fs.rm(dst, { recursive: true }, error => {
-    if (error) throw error;
+  fs.rm(dst, { recursive: true,, maxRetries: 3, retryDelay: 100 }, () => {
     fs.mkdir(dst, { recursive: true }, error => {
       if (error) throw error;
       fs.readdir(src, { withFileTypes: true }, (err, files) => {
@@ -22,7 +21,6 @@ function copyDir(src, dst) {
               });
             }
           });
-
         }
       });
     });
